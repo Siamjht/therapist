@@ -17,6 +17,7 @@ class CustomAppbar extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 24.w, vertical: 12.h),
       child: AppBar(
+        centerTitle: false,
         leading: CircleAvatar(
           backgroundColor: AppColors.primaryColor,
           radius: 20.h,
@@ -28,9 +29,9 @@ class CustomAppbar extends StatelessWidget {
             backgroundColor: AppColors.secondaryColor,
             radius: 20.h,
             child: badges.Badge(
-              badgeContent: CustomText(text: AppTexts.badgeText, color: AppColors.whiteColor,
+              badgeContent: CustomText(text: AppTexts.badgeNumberText, color: AppColors.whiteColor,
                 fontSize: 10, fontFamily: "Open Sans", fontWeight: FontWeight.w400,),
-              child: SvgPicture.asset("assets/icons/notifyBell.svg"),
+              child: SvgPicture.asset("assets/icons/notifyBell.svg",),
             ),
           ),
         ],

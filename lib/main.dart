@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/get.dart';
+import 'package:therapist/utils/app_colors.dart';
+import 'package:therapist/views/widgets/bottom_nav_bar.dart';
 
 import 'views/home/home_page.dart';
 
@@ -21,8 +24,11 @@ class MyApp extends StatelessWidget {
       splitScreenMode: true,
       // Use builder only if you need to use library outside ScreenUtilInit context
       builder: (_ , child) {
-        return MaterialApp(
+        return GetMaterialApp(
           debugShowCheckedModeBanner: false,
+          theme: ThemeData(
+              scaffoldBackgroundColor:AppColors.whiteColor
+          ),
           home: HomePage(),
         );
       },

@@ -1,18 +1,24 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:therapist/utils/app_colors.dart';
+import 'package:therapist/utils/app_texts.dart';
+import 'package:therapist/views/home/home_page.dart';
 
-class NavBar extends StatefulWidget {
+import '../../utils/app_icons.dart';
+import 'custom_text.dart';
+
+class BottomNavBar extends StatefulWidget {
   final int currentIndex;
 
-  const NavBar({required this.currentIndex, super.key});
+  const BottomNavBar({required this.currentIndex, super.key});
 
   @override
-  State<NavBar> createState() => _NavBarState();
+  State<BottomNavBar> createState() => _BottomNavBarState();
 }
 
-class _NavBarState extends State<NavBar> {
+class _BottomNavBarState extends State<BottomNavBar> {
   var bottomNavIndex = 0;
 
   List<String> selectedIcon = [
@@ -22,9 +28,9 @@ class _NavBarState extends State<NavBar> {
     AppIcons.profileIconSolid
   ];
 
-  List<String> selectedText = [];
+  List<String> selectedText = [AppTexts.home, AppTexts.appointment, AppTexts.message, AppTexts.profile];
 
-  List<String> unselectedIcon = [
+  List<String> unSelectedIcon = [
     AppIcons.homeIconOutline,
     AppIcons.appointmentIconOutline,
     AppIcons.messageIconOutline,
@@ -45,42 +51,34 @@ class _NavBarState extends State<NavBar> {
       padding:
       const EdgeInsetsDirectional.symmetric(horizontal: 24, vertical: 20),
       alignment: Alignment.center,
-      color: Colors.white,
+      color: AppColors.primaryColor,
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: List.generate(
-          unselectedIcon.length,
+          unSelectedIcon.length,
               (index) => InkWell(
             onTap: () => onTap(index),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
-                index != bottomNavIndex
-                    ? SvgPicture.asset(selectedIcon[index],
-                    color: AppColors.blue_500, height: 24.h, width: 24.w)
-                    : SvgPicture.asset(unselectedIcon[index],
-                    color: AppColors.blue_500, height: 24.h, width: 24.w),
+                SizedBox(
+                  width: 30.w,
+                  height: 30.w,
+                  child: index != bottomNavIndex
+                      ? SvgPicture.asset(unSelectedIcon[index], fit: BoxFit.fill,)
+                      : SvgPicture.asset(selectedIcon[index], fit: BoxFit.fill,),
+                ),
                 const SizedBox(
                   height: 4,
                 ),
                 CustomText(
-                  color: AppColors.blackColor,
+                  color: AppColors.whiteColor,
                   fontSize: 12,
-                  fontWeight: FontWeight.w600,
+                  fontWeight: FontWeight.w400,
                   text: selectedText[index],
                 ),
-                index == bottomNavIndex
-                    ? Container(
-                  width: 8.w,
-                  height: 8.h,
-                  decoration: const ShapeDecoration(
-                    color: Colors.white,
-                    shape: OvalBorder(),
-                  ),
-                )
-                    : const SizedBox()
               ],
             ),
           ),
@@ -90,11 +88,9 @@ class _NavBarState extends State<NavBar> {
   }
 
   void onTap(int index) {
-    // HomeController homeController = Get.find<HomeController>();
-    // homeController.scrollController.dispose();
     if (index == 0) {
       if (!(widget.currentIndex == 0)) {
-        Get.offAll(() => const HomeScreen(),
+        Get.offAll(() => const HomePage(),
             transition: Transition.noTransition);
       }
     } else if (index == 1) {
@@ -116,15 +112,14 @@ class _NavBarState extends State<NavBar> {
   }
 }
 
-class AppIcons{
+class ProfileScreen {
+  const ProfileScreen();
+}
 
-  static String homeIconSolid = "assets/icons/homeIconSolid.svg";
-  static String homeIconOutline = "assets/icons/homeIconOutline.svg";
-  static String appointmentIconSolid = "assets/icons/appointmentIconSolid.svg";
-  static String appointmentIconOutline = "assets/icons/appointmentIconOutline.svg";
-  static String messageIconSolid = "assets/icons/messageIconSolid.svg";
-  static String messageIconOutline = "assets/icons/messageIconOutline.svg";
-  static String profileIconOutline= "assets/icons/profileIconOutline.svg";
-  static String profileIconSolid= "assets/icons/profileIconSolid.svg";
-  static String notifyBell = "assets/icons/notifyBell.svg";
+class FriendsScreen {
+  const FriendsScreen();
+}
+
+class CategoryScreen {
+  const CategoryScreen();
 }
